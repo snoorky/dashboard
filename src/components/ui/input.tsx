@@ -1,0 +1,31 @@
+interface InputProps {
+	id: string;
+	className?: string;
+	label?: string;
+	placeholder?: string;
+	required: boolean;
+	type: string;
+	value: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export function Input(props: InputProps) {
+	return (
+		<div className={props.className}>
+			{props.label && (
+				<label htmlFor={props.id} className="block font-medium mb-1">
+					{props.label}
+				</label>
+			)}
+			<input
+				id={props.id}
+				type={props.type}
+				placeholder={props.placeholder}
+				className="w-full p-3 rounded-lg outline-none border border-white/14 bg-white/7 focus:border-primary"
+				onChange={props.onChange}
+				value={props.value}
+				required={props.required}
+			/>
+		</div>
+	);
+}
