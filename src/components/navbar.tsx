@@ -4,17 +4,17 @@ import { usePathname } from "next/navigation";
 
 const items = [
 	{
-		icon: <Home className="w-5 h-5" />,
+		icon: <Home className="w-5 md:w-7 h-5 md:h-7" />,
 		name: "Home",
 		url: "/dashboard",
 	},
 	{
-		icon: <LayoutDashboard className="w-5 h-5" />,
+		icon: <LayoutDashboard className="w-5 md:w-7 h-5 md:h-7" />,
 		name: "Digisac",
 		url: "/dashboard/digisac",
 	},
 	{
-		icon: <Globe2 className="w-5 h-5" />,
+		icon: <Globe2 className="w-5 md:w-7 h-5 md:h-7" />,
 		name: "Website",
 		url: "/dashboard/website",
 	},
@@ -31,7 +31,7 @@ export function Navbar() {
 					<Link
 						href={item.url}
 						key={index}
-						className={`flex items-center gap-2 text-sm p-2 rounded-xl ${
+						className={`flex items-center gap-2 text-sm md:text-lg p-2 rounded-xl ${
 							isActive && "bg-linear-to-r from-primary to-red-5"
 						}`}
 					>
