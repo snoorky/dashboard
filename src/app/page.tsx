@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { createClient } from "@/utils/supabase";
 import Image from "next/image";
 import { FormEvent, useState } from "react";
 
@@ -11,19 +12,17 @@ export default function Login() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState("");
 
+	const supabase = createClient();
+
 	async function handleSubmit(event: FormEvent) {
 		event.preventDefault();
 		setIsLoading(true);
 		setError("");
 
 		try {
-			const login = await fetch("/api/login", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, password }),
-			});
+			const { error } = await supabase.auth.signInWithPassword({ email, password });
 
-			if (!login.ok) {
+			if (error) {
 				setError("Erro ao fazer login");
 				setIsLoading(false);
 				return;
@@ -44,16 +43,13 @@ export default function Login() {
 			style={{ backgroundImage: "url('/background.svg')" }}
 		>
 			<div className="flex flex-col items-center space-y-4">
-				<div className="relative w-[125px] md:w-[175px] lg:w-[200px] h-[66px] md:h-[93px] lg:h-[106px]">
-					<Image
-						src="/logo.png"
-						className="absolute"
-						alt="logo da Beforce"
-						sizes="(min-width: 1024px) 200px, (min-width: 768px) 175px, 125px"
-						fill
-						priority
-					/>
-				</div>
+				<Image
+					src="/logo.png"
+					alt="logo da Beforce"
+					width={125}
+					height={66}
+					priority
+				/>
 				<div className="rounded-2xl backdrop-blur-sm border border-white/10 bg-white/3">
 					<form
 						className="relative min-w-80 md:w-md lg:w-lg rounded-2xl p-8 text-white space-y-4"

@@ -1,9 +1,22 @@
+"use client"
+
+import { useRouter } from "next/navigation";
+import { useAuth } from "../contexts/authContext";
+import { useEffect } from "react";
 import { Navbar } from "@/components/navbar";
-// import { Sidebar } from "@/components/sidebar";
 import Header from "@/components/header";
 import Digisac from "@/components/digisac";
 
-export default async function Dashboard() {
+export default function Dashboard() {
+	const { user, loading } = useAuth();
+	const router = useRouter();
+
+	useEffect(() => {
+		if (!loading && !user) {
+			router.push("/");
+		}
+	}, [user, loading, router]);
+
 	return (
 		<div className="flex">
 			{/* <Sidebar /> */}
