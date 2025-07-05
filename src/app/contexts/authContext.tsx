@@ -1,4 +1,3 @@
-// app/context/AuthProvider.tsx
 "use client";
 
 import { createClient } from "@/utils/supabase/client";
@@ -23,27 +22,48 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+type AuthProviderProps = {
+	children: ReactNode;
+	initialUser?: User | null;
+	initialCompany?: Company | null;
+};
+
+export function AuthProvider({
+	children,
+	initialUser = null,
+	initialCompany = null,
+}: AuthProviderProps) {
+	console.log("[AuthProvider] initialUser:", initialUser);
+	console.log("[AuthProvider] initialCompany:", initialCompany);
+
 	const supabase = createClient();
 
-	const [company, setCompany] = useState<Company | null>(null);
-	const [loading, setLoading] = useState(true);
-	const [user, setUser] = useState<User | null>(null);
+	const [user, setUser] = useState<User | null>(initialUser);
+	const [company, setCompany] = useState<Company | null>(initialCompany);
+	const [loading, setLoading] = useState(!initialUser);
 
 	useEffect(() => {
+		if (initialUser) {
+			console.log("[AuthProvider] Já temos usuário inicial, não busca.");
+			return;
+		}
+
 		let isMounted = true;
 
 		const fetchSessionAndCompany = async () => {
+			console.log("[AuthProvider] Buscando sessão e empresa...");
+
 			const { data: sessionData } = await supabase.auth.getSession();
 			const currentUser = sessionData.session?.user;
+			console.log("[AuthProvider] Sessão obtida:", currentUser?.email);
 
 			if (!currentUser) {
 				if (isMounted) {
 					setUser(null);
 					setCompany(null);
 					setLoading(false);
+					console.log("[AuthProvider] Usuário não encontrado na sessão.");
 				}
-
 				return;
 			}
 
@@ -59,8 +79,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 			if (!isMounted) return;
 
-			if (error || !companyData) setCompany(null);
-			else setCompany(companyData as Company);
+			if (error || !companyData) {
+				setCompany(null);
+				console.log("[AuthProvider] Erro ou empresa não encontrada:", error);
+			} else {
+				setCompany(companyData as Company);
+				console.log("[AuthProvider] Empresa carregada:", companyData);
+			}
 
 			setLoading(false);
 		};
@@ -70,7 +95,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 		return () => {
 			isMounted = false;
 		};
-	}, [supabase]);
+	}, [initialUser, supabase]);
 
 	return (
 		<AuthContext.Provider value={{ company, user, loading, supabase }}>
@@ -81,6 +106,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 export function useAuth(): AuthContextType {
 	const context = useContext(AuthContext);
-	if (!context) throw new Error("useAuth falhando dentro do AuthProvider");
+	if (!context) throw new Error("useAuth deve ser usado dentro do AuthProvider");
 	return context;
 }

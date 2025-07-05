@@ -1,22 +1,24 @@
+"use client";
+
 import { Globe2, Home, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const items = [
 	{
-		icon: <Home className="w-5 md:w-7 h-5 md:h-7" />,
+		icon: <Home className="w-5 h-5" />,
 		name: "Home",
 		url: "/dashboard",
 	},
 	{
-		icon: <LayoutDashboard className="w-5 md:w-7 h-5 md:h-7" />,
+		icon: <LayoutDashboard className="w-5 h-5" />,
 		name: "Digisac",
 		url: "/dashboard/digisac",
 	},
 	{
-		icon: <Globe2 className="w-5 md:w-7 h-5 md:h-7" />,
+		icon: <Globe2 className="w-5 h-5" />,
 		name: "Website",
-		url: "/dashboard/website",
+		url: "/dashboard/",
 	},
 ];
 
@@ -29,14 +31,14 @@ export function Navbar() {
 				const isActive = pathname === item.url;
 				return (
 					<Link
-						href={item.url}
 						key={index}
-						className={`flex items-center gap-2 text-sm md:text-lg p-2 rounded-xl ${
-							isActive && "bg-linear-to-r from-primary to-red-5"
-						}`}
+						href={item.url}
+						className={`flex items-center gap-2 text-sm p-2 rounded-xl
+							${isActive ? "px-3 bg-linear-to-r from-primary to-red-5 text-white" : "border border-[#e5e7eb]"}
+						`}
 					>
 						{item.icon}
-						{isActive && <span className="">{item.name}</span>}
+						{isActive && <span>{item.name}</span>}
 					</Link>
 				);
 			})}

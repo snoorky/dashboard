@@ -19,7 +19,29 @@ export async function POST(request: Request) {
 			return NextResponse.json({ error: authError?.message || "Erro ao logar" }, { status: 401 });
 		}
 
-		return NextResponse.json({ user: authData.user });
+		const response = NextResponse.json({ user: authData.user });
+
+		const accessToken = authData.session.access_token;
+		const refreshToken = authData.session.refresh_token;
+		const expiresIn = authData.session.expires_at;
+
+		response.cookies.set("sb-access-token", accessToken, {
+			httpOnly: true,
+			path: "/",
+			secure: process.env.NODE_ENV === "production",
+			maxAge: expiresIn ? expiresIn - Math.floor(Date.now() / 1000) : 60 * 60,
+			sameSite: "lax",
+		});
+
+		response.cookies.set("sb-refresh-token", refreshToken, {
+			httpOnly: true,
+			path: "/",
+			secure: process.env.NODE_ENV === "production",
+			maxAge: 60 * 60 * 24 * 30,
+			sameSite: "lax",
+		});
+
+		return response;
 	} catch {
 		return NextResponse.json({ error: "Erro interno." }, { status: 500 });
 	}

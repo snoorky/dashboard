@@ -1,18 +1,18 @@
-"use client";
-
 import { Navbar } from "@/components/navbar";
-import { useAuth } from "../contexts/authContext";
+// import { Sidebar } from "@/components/sidebar";
+import Header from "@/components/header";
+import Digisac from "@/components/digisac";
 
-export default function Dashboard() {
-	const { company, user } = useAuth();
-
+export default async function Dashboard() {
 	return (
-		<>
-			<div>
-				<h1>Olá.. {company?.business_name}</h1>
-				<h2>Nome: {user?.email}</h2>
-				<Navbar />
+		<div className="flex">
+			{/* <Sidebar /> */}
+			<Navbar />
+
+			<div className="flex flex-col min-h-screen w-full xl:ml-48">
+				<Header />
+				<Digisac />
 			</div>
-		</>
+		</div>
 	);
 }

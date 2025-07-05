@@ -30,6 +30,7 @@
 
 @layer base {
 	body {
-		@apply bg-black text-white;
+		@apply bg-white text-black;
+		/* @apply bg-black text-white; */
 	}
 }
