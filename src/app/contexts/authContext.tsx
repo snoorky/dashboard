@@ -48,7 +48,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     fetchSessionAndCompany();
 
-    return () => { isMounted = false };
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user) {
+        setUser(session.user);
+      } else {
+        setUser(null);
+        setCompany(null);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+      authListener?.subscription.unsubscribe();
+    };
   }, [supabase]);
 
   return (

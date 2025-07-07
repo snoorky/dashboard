@@ -29,8 +29,8 @@ export default function Login() {
 				return;
 			}
 
-			router.refresh();
-			router.push("/dashboard");
+			const { data: userData } = await supabase.auth.getUser();
+			if (userData?.user) router.push("/dashboard");
 		} catch {
 			setError("Erro inesperado.");
 		} finally {
