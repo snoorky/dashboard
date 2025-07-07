@@ -1,6 +1,6 @@
 "use client";
 
-import { createClient } from "@/utils/supabase";
+import supabase from "@/utils/supabase";
 import { AuthContextType, Company } from "@/utils/types";
 import { User } from "@supabase/supabase-js";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
@@ -11,7 +11,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [company, setCompany] = useState<Company | null>(null);
   const [loading, setLoading] = useState(true);
-  const supabase = createClient();
 
   useEffect(() => {
     let isMounted = true;
@@ -48,7 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     fetchSessionAndCompany();
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
         setUser(session.user);
       } else {
@@ -59,7 +58,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return () => {
       isMounted = false;
-      authListener?.subscription.unsubscribe();
+      subscription.unsubscribe();
     };
   }, [supabase]);
 

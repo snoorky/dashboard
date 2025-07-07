@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { createClient } from "@/utils/supabase";
+import supabase from "@/utils/supabase";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -13,7 +13,6 @@ export default function Login() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState("");
 	const router = useRouter();
-	const supabase = createClient();
 
 	async function handleSubmit(event: FormEvent) {
 		event.preventDefault();
@@ -29,8 +28,8 @@ export default function Login() {
 				return;
 			}
 
-			const { data: userData } = await supabase.auth.getUser();
-			if (userData?.user) router.push("/dashboard");
+			await new Promise((res) => setTimeout(res, 100));
+			router.push("/dashboard");
 		} catch {
 			setError("Erro inesperado.");
 		} finally {
