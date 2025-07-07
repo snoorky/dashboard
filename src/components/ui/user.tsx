@@ -3,8 +3,8 @@
 import { useAuth } from "@/app/contexts/authContext";
 import { ChevronDown, LogOut, User2 } from "lucide-react";
 import { useState } from "react";
-import { createClient } from "@/utils/supabase";
 import { useRouter } from "next/navigation";
+import supabase from "@/utils/supabase";
 
 export function User() {
 	const { user, company } = useAuth();
@@ -12,7 +12,6 @@ export function User() {
 	const router = useRouter();
 
 	async function handleLogout() {
-		const supabase = createClient();
 		await supabase.auth.signOut();
 		router.push("/");
 	}

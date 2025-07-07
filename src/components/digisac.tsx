@@ -1,12 +1,12 @@
 "use client"
 
 import { useAuth } from "@/app/contexts/authContext";
-import { createClient } from "@/utils/supabase";
 import { Report } from "@/utils/types";
 import { Bot, ChartNoAxesCombined, Clock, FileText, Hourglass, ListFilterPlus, MessageCircleMore, MessageCircleOff, MessageCirclePlus, MessageSquare, Timer, UsersRound } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Select } from "./ui/select";
 import { Skeleton } from "./ui/skeleton";
+import supabase from "@/utils/supabase";
 
 // Retorna o período do mês anterior no formato "YYYY-MM"
 function getPreviousMonthPeriod() {
@@ -29,7 +29,6 @@ function formatPeriod(period: string): string {
 
 export default function Digisac() {
 	const { company } = useAuth();
-	const supabase = createClient();
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [availablePeriods, setAvailablePeriods] = useState<string[]>([]);
