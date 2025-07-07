@@ -28,8 +28,15 @@ export default function Login() {
 				return;
 			}
 
-			await new Promise((res) => setTimeout(res, 100));
-			router.push("/dashboard");
+			const {
+				data: { session },
+			} = await supabase.auth.getSession();
+
+			if (session?.user) {
+				router.push("/dashboard");
+			} else {
+				setTimeout(() => router.push("/dashboard"), 200);
+			}
 		} catch {
 			setError("Erro inesperado.");
 		} finally {
@@ -46,7 +53,10 @@ export default function Login() {
 				<Image src="/logo.png" alt="logo da Beforce" width={125} height={66} priority />
 
 				<div className="rounded-2xl backdrop-blur-sm border border-white/10 bg-white/3">
-					<form onSubmit={handleSubmit} className="relative min-w-80 md:w-md lg:w-lg rounded-2xl p-8 text-white space-y-4">
+					<form
+						onSubmit={handleSubmit}
+						className="relative min-w-80 md:w-md lg:w-lg rounded-2xl p-8 text-white space-y-4"
+					>
 						<Input
 							id="email"
 							label="E-mail"

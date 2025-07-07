@@ -8,69 +8,65 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [company, setCompany] = useState<Company | null>(null);
-  const [loading, setLoading] = useState(true);
+	const [user, setUser] = useState<User | null>(null);
+	const [company, setCompany] = useState<Company | null>(null);
+	const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    let isMounted = true;
+	useEffect(() => {
+		let isMounted = true;
 
-    const fetchSessionAndCompany = async () => {
-      const { data: sessionData } = await supabase.auth.getSession();
-      const currentUser = sessionData.session?.user;
+		const {
+			data: { subscription },
+		} = supabase.auth.onAuthStateChange((_event, session) => {
+			const currentUser = session?.user ?? null;
 
-      if (!currentUser) {
-        if (isMounted) {
-          setUser(null);
-          setCompany(null);
-          setLoading(false);
-        }
-        return;
-      }
+			if (!isMounted) return;
 
-      if (isMounted) setUser(currentUser);
+			setUser(currentUser);
 
-      const domain = currentUser.email?.split("@")[1];
+			if (!currentUser) {
+				setCompany(null);
+				setLoading(false);
+				return;
+			}
 
-      const { data: companyData, error } = await supabase
-        .from("users")
-        .select("*")
-        .eq("domain", domain)
-        .single();
+			const domain = currentUser.email?.split("@")[1];
 
-      if (!isMounted) return;
+			supabase
+				.from("users")
+				.select("*")
+				.eq("domain", domain)
+				.single()
+				.then(({ data, error }) => {
+					if (!isMounted) return;
+					if (error || !data) setCompany(null);
+					else setCompany(data as Company);
+					setLoading(false);
+				});
+		});
 
-      if (error || !companyData) setCompany(null);
-      else setCompany(companyData as Company);
-      setLoading(false);
-    };
+		supabase.auth.getSession().then(({ data }) => {
+			const currentUser = data.session?.user ?? null;
+			if (!isMounted) return;
+			setUser(currentUser);
+			setLoading(false);
+		});
 
-    fetchSessionAndCompany();
+		return () => {
+			isMounted = false;
+			subscription.unsubscribe();
+		};
+	}, []);
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.user) {
-        setUser(session.user);
-      } else {
-        setUser(null);
-        setCompany(null);
-      }
-    });
-
-    return () => {
-      isMounted = false;
-      subscription.unsubscribe();
-    };
-  }, [supabase]);
-
-  return (
-    <AuthContext.Provider value={{ company, user, loading, supabase }}>
-      {children}
-    </AuthContext.Provider>
-  );
+	return (
+		<AuthContext.Provider value={{ company, user, loading, supabase }}>
+			{children}
+		</AuthContext.Provider>
+	);
 }
 
 export function useAuth(): AuthContextType {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth deve ser usado dentro do AuthProvider");
-  return context;
+	const context = useContext(AuthContext);
+	if (!context) throw new Error("useAuth deve ser usado dentro do AuthProvider");
+	return context;
 }

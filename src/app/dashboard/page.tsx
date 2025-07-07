@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -14,6 +14,10 @@ export default function Dashboard() {
 	useEffect(() => {
 		if (!loading && !user) router.push("/");
 	}, [user, loading, router]);
+
+	if (loading) return <p>Carregando...</p>;
+
+	if (!user) return null;
 
 	return (
 		<div className="flex">
