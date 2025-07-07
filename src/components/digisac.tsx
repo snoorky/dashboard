@@ -183,7 +183,7 @@ export default function Digisac() {
 	}, [reportsByPeriod, selectedPeriod, operatorOptions]);
 
 	return (
-		<main className="px-4 pt-8 space-y-8">
+		<main className="px-4 py-8 space-y-8">
 			<div className="flex items-center gap-2 mb-1">
 				<ChartNoAxesCombined className="w-7 h-7 text-primary" />
 				<h1 className="text-3xl font-bold">Relatórios Digisac</h1>
