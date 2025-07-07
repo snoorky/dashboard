@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createClient } from "@/utils/supabase";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function Login() {
@@ -11,7 +12,7 @@ export default function Login() {
 	const [password, setPassword] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState("");
-
+	const router = useRouter();
 	const supabase = createClient();
 
 	async function handleSubmit(event: FormEvent) {
@@ -28,7 +29,8 @@ export default function Login() {
 				return;
 			}
 
-			window.location.href = "/dashboard";
+			const { data: userData } = await supabase.auth.getUser();
+			if (userData?.user) router.push("/dashboard");
 		} catch {
 			setError("Erro inesperado.");
 		} finally {
@@ -37,24 +39,15 @@ export default function Login() {
 	}
 
 	return (
-		// <div className="w-screen h-screen bg-red-400 md:bg-blue-300 lg:bg-green-300 xl:bg-orange-400 2xl:bg-pink-300"></div>
 		<main
 			className="min-h-svh min-w-svw bg-cover bg-no-repeat flex items-center justify-center"
 			style={{ backgroundImage: "url('/background.svg')" }}
 		>
 			<div className="flex flex-col items-center space-y-4">
-				<Image
-					src="/logo.png"
-					alt="logo da Beforce"
-					width={125}
-					height={66}
-					priority
-				/>
+				<Image src="/logo.png" alt="logo da Beforce" width={125} height={66} priority />
+
 				<div className="rounded-2xl backdrop-blur-sm border border-white/10 bg-white/3">
-					<form
-						className="relative min-w-80 md:w-md lg:w-lg rounded-2xl p-8 text-white space-y-4"
-						onSubmit={handleSubmit}
-					>
+					<form onSubmit={handleSubmit} className="relative min-w-80 md:w-md lg:w-lg rounded-2xl p-8 text-white space-y-4">
 						<Input
 							id="email"
 							label="E-mail"
@@ -64,6 +57,7 @@ export default function Login() {
 							onChange={(e) => setEmail(e.target.value)}
 							required
 						/>
+
 						<Input
 							id="password"
 							label="Senha"

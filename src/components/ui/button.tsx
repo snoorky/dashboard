@@ -1,11 +1,5 @@
+import { ButtonProps } from "@/utils/interfaces";
 import { Spinner } from "./spinner";
-
-interface ButtonProps {
-	isLoading?: boolean;
-	label: string;
-	loadingText?: string;
-	type: "submit" | "reset" | "button";
-}
 
 export function Button(props: ButtonProps) {
 	return (

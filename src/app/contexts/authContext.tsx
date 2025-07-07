@@ -1,33 +1,17 @@
 "use client";
 
 import { createClient } from "@/utils/supabase";
-import { SupabaseClient, User } from "@supabase/supabase-js";
+import { AuthContextType, Company } from "@/utils/types";
+import { User } from "@supabase/supabase-js";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-
-export type Company = {
-  id: string;
-  business_name: string;
-  domain: string;
-  url: string;
-  token: string;
-  created_at: string;
-};
-
-type AuthContextType = {
-  company: Company | null;
-  loading: boolean;
-  supabase: SupabaseClient;
-  user: User | null;
-};
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const supabase = createClient();
-
   const [user, setUser] = useState<User | null>(null);
   const [company, setCompany] = useState<Company | null>(null);
   const [loading, setLoading] = useState(true);
+  const supabase = createClient();
 
   useEffect(() => {
     let isMounted = true;
@@ -64,10 +48,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     fetchSessionAndCompany();
 
-    return () => {
-      isMounted = false;
-    };
+    return () => { isMounted = false };
   }, [supabase]);
+
   return (
     <AuthContext.Provider value={{ company, user, loading, supabase }}>
       {children}
