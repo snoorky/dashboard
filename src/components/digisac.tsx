@@ -6,7 +6,7 @@ import { Bot, ChartNoAxesCombined, Clock, FileText, Hourglass, ListFilterPlus, M
 import { useEffect, useMemo, useState } from "react";
 import { Select } from "./ui/select";
 import { Skeleton } from "./ui/skeleton";
-import supabase from "@/utils/supabase";
+import supabase from "@/utils/supabase/client";
 
 // Retorna o período do mês anterior no formato "YYYY-MM"
 function getPreviousMonthPeriod() {

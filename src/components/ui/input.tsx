@@ -15,6 +15,7 @@ export function Input(props: InputProps) {
 				className="w-full p-3 rounded-lg outline-none border border-white/14 bg-white/7 focus:border-primary"
 				onChange={props.onChange}
 				value={props.value}
+				autoComplete={props.autocomplete}
 				required={props.required}
 			/>
 		</div>

@@ -1,6 +1,6 @@
 "use client";
 
-import supabase from "@/utils/supabase";
+import supabase from "@/utils/supabase/client";
 import { AuthContextType, Company } from "@/utils/types";
 import { User } from "@supabase/supabase-js";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";

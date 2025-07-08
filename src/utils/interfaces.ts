@@ -7,6 +7,7 @@ export interface ButtonProps {
 
 export interface InputProps {
   id: string;
+  autocomplete?: string;
   className?: string;
   label?: string;
   placeholder?: string;

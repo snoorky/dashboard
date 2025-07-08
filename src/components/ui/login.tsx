@@ -4,7 +4,7 @@ import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import supabase from "@/utils/supabase";
+import supabase from "@/utils/supabase/client";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -65,6 +65,7 @@ export default function LoginForm() {
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        autocomplete="current-password"
         required
       />
 

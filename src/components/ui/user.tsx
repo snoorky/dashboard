@@ -4,7 +4,7 @@ import { useAuth } from "@/app/contexts/authContext";
 import { ChevronDown, LogOut, User2 } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import supabase from "@/utils/supabase";
+import supabase from "@/utils/supabase/client";
 
 export function User() {
 	const { user, company } = useAuth();
