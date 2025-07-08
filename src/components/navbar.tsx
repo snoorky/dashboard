@@ -23,7 +23,11 @@ export function Navbar() {
 						`}
 					>
 						{route.icon}
-						{isActive && <span>{route.name}</span>}
+						{isActive ? (
+							<span>{route.name}</span>
+						) : (
+							<span className="sr-only">{route.name}</span>
+						)}
 					</Link>
 				);
 			})}

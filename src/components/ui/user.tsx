@@ -18,7 +18,7 @@ export function User() {
 
 	return (
 		<div className="relative">
-			<button className="flex items-center gap-3 p-2"
+			<button className="flex items-center gap-3 p-2" aria-label="Abrir menu do usuário"
 				onClick={() => setShowUserDropdown(!showUserDropdown)}
 			>
 				<div className="flex items-center justify-center w-8 h-8 rounded-full bg-linear-to-r from-primary to-red-5">
