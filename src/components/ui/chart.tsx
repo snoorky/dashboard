@@ -2,7 +2,7 @@
 
 import { Report } from "@/utils/types";
 import { Frown, Smile } from "lucide-react";
-import { CartesianGrid, DotProps, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 interface ClientChartProps {
   reports?: Report[] | null;
