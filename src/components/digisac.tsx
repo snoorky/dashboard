@@ -130,7 +130,7 @@ export default function Digisac() {
 
 			return { ...metric, value };
 		});
-	}, [filteredReports]);
+	}, [filteredReports, metricsTemplate]);
 
 	// Agrupa dados por operador para exibição em tabela
 	const reportDataPerOperator = useMemo(() => {
@@ -151,7 +151,7 @@ export default function Digisac() {
 				values,
 			};
 		});
-	}, [reportsByPeriod, selectedPeriod, operatorOptions]);
+	}, [reportsByPeriod, selectedPeriod, operatorOptions, metricsTemplate]);
 
 	return (
 		<main className="px-4 py-8 space-y-8">

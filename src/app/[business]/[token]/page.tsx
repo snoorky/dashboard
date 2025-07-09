@@ -129,19 +129,19 @@ export default async function ReportPage({ params }: BusinessTokenProps) {
       <section className="space-y-4">
         <ReactMarkdown
           components={{
-            h2: ({ node, ...props }) => (
+            h2: (props) => (
               <h2 className="text-2xl font-semibold text-center mb-4" {...props} />
             ),
-            p: ({ node, ...props }) => (
+            p: (props) => (
               <p className="leading-relaxed mb-3" {...props} />
             ),
-            strong: ({ node, ...props }) => (
+            strong: (props) => (
               <strong className="font-semibold" {...props} />
             ),
-            ul: ({ node, ...props }) => (
+            ul: (props) => (
               <ul className="list-disc pl-6 space-y-2 mb-4" {...props} />
             ),
-            li: ({ node, ...props }) => (
+            li: (props) => (
               <li className="leading-relaxed" {...props} />
             ),
           }}

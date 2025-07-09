@@ -2,11 +2,17 @@
 
 import { Report } from "@/utils/types";
 import { Frown, Smile } from "lucide-react";
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { CartesianGrid, DotProps, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 interface ClientChartProps {
   reports?: Report[] | null;
 }
+
+type CustomDotProps = {
+  cx?: number;
+  cy?: number;
+  value?: number;
+};
 
 export default function ClientChart({ reports }: ClientChartProps) {
   const safeReports = reports ?? [];
@@ -15,14 +21,12 @@ export default function ClientChart({ reports }: ClientChartProps) {
     tickets: user.total_tickets_count,
   }));
 
-  const CustomizedDot = (props: any) => {
-    const { cx, cy, value } = props;
+  const CustomizedDot = ({ cx, cy, value }: CustomDotProps) => {
+    if (cx === undefined || cy === undefined || value === undefined) return null;
 
-    if (value >= 20) {
-      return <Smile x={cx - 12} y={cy - 12} fill="green" stroke="white" />
-    }
-
-    return <Frown x={cx - 12} y={cy - 12} fill="red" stroke="white" />
+    return value >= 20
+      ? <Smile x={cx - 12} y={cy - 12} fill="green" stroke="white" />
+      : <Frown x={cx - 12} y={cy - 12} fill="red" stroke="white" />;
   };
 
   return (
