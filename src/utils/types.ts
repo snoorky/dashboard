@@ -35,3 +35,10 @@ export type Report = {
   contacts_count: number;
   created_at: string;
 };
+
+export type BusinessTokenProps = {
+  params: Promise<{
+    business: string;
+    token: string;
+  }>;
+};

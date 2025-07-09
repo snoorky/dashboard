@@ -7,25 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Select } from "./ui/select";
 import { Skeleton } from "./ui/skeleton";
 import supabase from "@/utils/supabase/client";
-
-// Retorna o período do mês anterior no formato "YYYY-MM"
-function getPreviousMonthPeriod() {
-	const currentDate = new Date();
-	currentDate.setMonth(currentDate.getMonth() - 1);
-	const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-	return `${currentDate.getFullYear()}-${month}`;
-}
-
-// Formata o período para exibição (ex: "2024-06" => "Junho/2024")
-function formatPeriod(period: string): string {
-	const [year, month] = period.split("-");
-	const monthNames = [
-		"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-		"Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-	];
-	const monthIndex = parseInt(month, 10) - 1;
-	return `${monthNames[monthIndex]}/${year}`;
-}
+import { formatPeriod, getPreviousMonthPeriod } from "@/utils/functions";
 
 export default function Digisac() {
 	const { company } = useAuth();
@@ -43,12 +25,7 @@ export default function Digisac() {
 
 		async function loadAvailablePeriods() {
 			setIsLoading(true);
-
-			const { data, error } = await supabase
-				.from("reports")
-				.select("period")
-				.eq("business_id", company?.id)
-
+			const { data, error } = await supabase.from("reports").select("period").eq("business_id", company?.id)
 			if (!error && data) setAvailablePeriods(Array.from(new Set(data.map((report) => report.period))));
 			setIsLoading(false);
 		}
@@ -62,13 +39,7 @@ export default function Digisac() {
 
 		async function loadReportsByPeriod() {
 			setIsLoading(true);
-
-			const { data, error } = await supabase
-				.from("reports")
-				.select("*")
-				.eq("business_id", company?.id)
-				.eq("period", selectedPeriod);
-
+			const { data, error } = await supabase.from("reports").select("*").eq("business_id", company?.id).eq("period", selectedPeriod);
 			if (!error && data) setReportsByPeriod((prevCache) => ({ ...prevCache, [selectedPeriod]: data }));
 			setIsLoading(false);
 		}

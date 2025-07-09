@@ -27,15 +27,10 @@ export default function LoginForm() {
         return;
       }
 
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+      const { data: { session } } = await supabase.auth.getSession();
 
-      if (session?.user) {
-        router.push("/dashboard");
-      } else {
-        setTimeout(() => router.push("/dashboard"), 200);
-      }
+      if (session?.user) router.push("/dashboard");
+      else setTimeout(() => router.push("/dashboard"), 200);
     } catch {
       setError("Erro inesperado.");
     } finally {

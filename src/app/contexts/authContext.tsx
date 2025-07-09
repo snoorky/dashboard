@@ -15,9 +15,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 	useEffect(() => {
 		let isMounted = true;
 
-		const {
-			data: { subscription },
-		} = supabase.auth.onAuthStateChange((_event, session) => {
+		const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
 			const currentUser = session?.user ?? null;
 
 			if (!isMounted) return;
@@ -32,11 +30,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 			const domain = currentUser.email?.split("@")[1];
 
-			supabase
-				.from("users")
-				.select("*")
-				.eq("domain", domain)
-				.single()
+			supabase.from("users").select("*").eq("domain", domain).single()
 				.then(({ data, error }) => {
 					if (!isMounted) return;
 					if (error || !data) setCompany(null);
