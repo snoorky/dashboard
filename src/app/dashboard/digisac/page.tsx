@@ -21,7 +21,7 @@ export default function Dashboard() {
 			<Sidebar />
 			<Navbar />
 
-			<div className="flex flex-col min-h-screen w-full xl:ml-44">
+			<div className="flex flex-col min-h-screen w-full xl:ml-44 overflow-hidden">
 				<Header />
 				<Digisac />
 			</div>

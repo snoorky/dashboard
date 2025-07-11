@@ -228,7 +228,7 @@ export default function Digisac() {
 					))}
 				</div>
 
-				<div className="hidden md:block overflow-x-auto">
+				<div className="hidden md:block w-full overflow-x-auto">
 					<table className="min-w-max w-full">
 						<thead>
 							<tr className="bg-gray-50">

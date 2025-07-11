@@ -14,7 +14,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="max-xl:hidden fixed inset-0 flex flex-col z-50 px-4 max-w-44 min-h-screen border-r border-[#e5e7eb]">
+    <aside className="max-xl:hidden fixed inset-0 flex flex-col z-50 px-4 max-w-44 min-h-screen border-r border-[#e5e7eb] bg-white">
       <Image src="/logo-dark.png" alt="Beforce" width={125} height={66} priority />
       <nav className="flex-1 space-y-2 mt-8">
         {navigation.map((route, index) => {
