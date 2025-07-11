@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/beforce.png",
+        url: "https://dashboard.beforce.com.br/beforce.png",
         alt: "Relatório Mensal de Atendimento",
         width: 1200,
         height: 630,
