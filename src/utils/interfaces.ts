@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface ButtonProps {
   isLoading?: boolean;
   label: string;
@@ -7,7 +9,7 @@ export interface ButtonProps {
 
 export interface InputProps {
   id: string;
-  autocomplete?: string;
+  autoComplete?: string;
   className?: string;
   label?: string;
   placeholder?: string;
@@ -24,4 +26,10 @@ export interface SelectProps {
   options: string[];
   value: string;
   onChange: (value: string) => void;
+}
+
+export interface NavItemProps {
+  icon: ReactNode;
+  name: string;
+  url: string;
 }
