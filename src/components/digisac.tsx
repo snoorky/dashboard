@@ -27,7 +27,7 @@ export default function Digisac() {
 			setIsLoading(true);
 			const { data, error } = await supabase.from("reports").select("period").eq("business_id", company?.id)
 			if (!error && data) setAvailablePeriods(Array.from(new Set(data.map((report) => report.period))));
-			setIsLoading(false);
+			// setIsLoading(false);
 		}
 
 		loadAvailablePeriods();
@@ -41,7 +41,7 @@ export default function Digisac() {
 			setIsLoading(true);
 			const { data, error } = await supabase.from("reports").select("*").eq("business_id", company?.id).eq("period", selectedPeriod);
 			if (!error && data) setReportsByPeriod((prevCache) => ({ ...prevCache, [selectedPeriod]: data }));
-			setIsLoading(false);
+			// setIsLoading(false);
 		}
 
 		loadReportsByPeriod();
@@ -83,21 +83,21 @@ export default function Digisac() {
 
 	// Métricas principais do topo (abertos, fechados, mensagens, contatos)
 	const performanceMetrics = [
-		{ label: "Chamados abertos", style: "text-green-600 bg-green-100", icon: <MessageCirclePlus className="w-5 h-5" />, value: metricValues.opened },
-		{ label: "Chamados fechados", style: "text-red-600 bg-red-100", icon: <MessageCircleOff className="w-5 h-5" />, value: metricValues.closed },
-		{ label: "Total de mensagens", style: "text-blue-600 bg-blue-100", icon: <MessageCircleMore className="w-5 h-5" />, value: metricValues.messages },
-		{ label: "Total de contatos", style: "text-purple-600 bg-purple-100", icon: <UsersRound className="w-5 h-5" />, value: metricValues.contacts }
+		{ label: "Chamados abertos", style: "text-green-400 bg-green-900", icon: <MessageCirclePlus className="w-5 h-5" />, value: metricValues.opened },
+		{ label: "Chamados fechados", style: "text-red-400 bg-red-900", icon: <MessageCircleOff className="w-5 h-5" />, value: metricValues.closed },
+		{ label: "Total de mensagens", style: "text-blue-400 bg-blue-900", icon: <MessageCircleMore className="w-5 h-5" />, value: metricValues.messages },
+		{ label: "Total de contatos", style: "text-purple-400 bg-purple-900", icon: <UsersRound className="w-5 h-5" />, value: metricValues.contacts }
 	];
 
 	// Template de todas as métricas que serão exibidas
 	const metricsTemplate = useMemo(() => ([
-		{ label: "Tempo médio de chamados", style: "text-sky-600 bg-sky-100", icon: <Hourglass className="w-5 h-5" />, key: "ticket_time", type: "time" },
-		{ label: "Tempo médio da primeira espera", style: "text-orange-600 bg-orange-100", icon: <Timer className="w-5 h-5" />, key: "waiting_time", type: "time" },
-		{ label: "Tempo médio após o bot", style: "text-amber-600 bg-amber-100", icon: <Bot className="w-5 h-5" />, key: "waiting_time_after_bot", type: "time" },
-		{ label: "Tempo médio de espera", style: "text-violet-600 bg-violet-100", icon: <Clock className="w-5 h-5" />, key: "waiting_time_avg", type: "time" },
-		{ label: "Mensagens enviadas", style: "text-emerald-600 bg-emerald-100", icon: <MessageSquare className="w-5 h-5" />, key: "sent_messages_count", type: "count" },
-		{ label: "Mensagens recebidas", style: "text-cyan-600 bg-cyan-100", icon: <MessageCircleMore className="w-5 h-5" />, key: "received_messages_count", type: "count" },
-		{ label: "Total de chamados", style: "text-rose-600 bg-rose-100", icon: <FileText className="w-5 h-5" />, key: "total_tickets_count", type: "count" },
+		{ label: "Tempo médio de chamados", style: "text-sky-400 bg-sky-900", icon: <Hourglass className="w-5 h-5" />, key: "ticket_time", type: "time" },
+		{ label: "Tempo médio da primeira espera", style: "text-orange-400 bg-orange-900", icon: <Timer className="w-5 h-5" />, key: "waiting_time", type: "time" },
+		{ label: "Tempo médio após o bot", style: "text-amber-400 bg-amber-900", icon: <Bot className="w-5 h-5" />, key: "waiting_time_after_bot", type: "time" },
+		{ label: "Tempo médio de espera", style: "text-violet-400 bg-violet-900", icon: <Clock className="w-5 h-5" />, key: "waiting_time_avg", type: "time" },
+		{ label: "Mensagens enviadas", style: "text-emerald-400 bg-emerald-900", icon: <MessageSquare className="w-5 h-5" />, key: "sent_messages_count", type: "count" },
+		{ label: "Mensagens recebidas", style: "text-cyan-400 bg-cyan-900", icon: <MessageCircleMore className="w-5 h-5" />, key: "received_messages_count", type: "count" },
+		{ label: "Total de chamados", style: "text-rose-400 bg-rose-900", icon: <FileText className="w-5 h-5" />, key: "total_tickets_count", type: "count" },
 	]), []);
 
 	// Processa dados filtrados e retorna métricas calculadas
@@ -159,11 +159,11 @@ export default function Digisac() {
 				<ChartNoAxesCombined className="w-7 h-7 text-primary" />
 				<h1 className="text-3xl font-bold">Relatórios Digisac</h1>
 			</div>
-			<p>Acompanhe as métricas de atendimento</p>
+			<p className="text-gray-400">Acompanhe as métricas de atendimento</p>
 
 			<section className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
 				{performanceMetrics.map((metric, index) => (
-					<div key={index} className="p-3 rounded-xl border border-[#e5e7eb]">
+					<div key={index} className="p-3 rounded-xl border border-gray-700 bg-gray-800">
 						<div className="flex items-center gap-2">
 							<div className={`w-8 h-8 rounded-lg flex items-center justify-center mb-1 ${metric.style}`}>
 								{isLoading ? (<Skeleton className="w-8 h-8" />) : (metric.icon)}
@@ -172,18 +172,18 @@ export default function Digisac() {
 								{isLoading ? <Skeleton className="w-12 h-5" /> : metric.value}
 							</span>
 						</div>
-						<span className="text-sm text-gray-600">{isLoading ? <Skeleton className="w-24 h-4 mt-1" /> : metric.label}</span>
+						<span className="text-sm text-gray-400">{isLoading ? <Skeleton className="w-24 h-4 mt-1" /> : metric.label}</span>
 					</div>
 				))}
 			</section>
 
-			<section className="p-3 rounded-xl border border-[#e5e7eb]">
-				<div className="flex items-center gap-2">
+			<section className="pt-3 rounded-xl border border-gray-700 bg-gray-800">
+				<div className="px-3 flex items-center gap-2">
 					<ListFilterPlus className="w-5 h-5 text-primary" />
 					<h2 className="text-lg font-semibold">Filtros e Métricas</h2>
 				</div>
 
-				<div className="grid grid-cols-2 gap-2 md:gap-4 my-4 pb-4 border-b border-[#e5e7eb]">
+				<div className="grid grid-cols-2 gap-2 md:gap-4 my-4 px-3 pb-4 border-b border-gray-700">
 					<Select
 						id="operators"
 						label="Funcionários"
@@ -208,15 +208,15 @@ export default function Digisac() {
 					/>
 				</div>
 
-				<div className="md:hidden space-y-4">
+				<div className="md:hidden space-y-4 px-3">
 					{reportData.map((item, index) => (
-						<div key={index} className="p-2 rounded-xl border border-[#e5e7eb] bg-gray-50">
+						<div key={index} className="p-2 rounded-xl border border-gray-700 bg-gray-700">
 							<div className="flex items-center justify-between">
 								<div className="flex items-center gap-2">
 									<div className={`w-8 h-8 rounded-lg flex items-center justify-center ${item.style}`}>
 										{isLoading ? (<Skeleton className="w-8 h-8" />) : (item.icon)}
 									</div>
-									<span className="text-sm font-medium text-gray-600">
+									<span className="text-sm font-medium text-gray-400">
 										{isLoading ? <Skeleton className="h-4 w-32" /> : item.label}
 									</span>
 								</div>
@@ -231,15 +231,15 @@ export default function Digisac() {
 				<div className="hidden md:block w-full overflow-x-auto">
 					<table className="min-w-max w-full">
 						<thead>
-							<tr className="bg-gray-50">
-								<th className="w-72 px-3 py-3 text-left text-sm font-semibold rounded-l-lg">
+							<tr className="bg-gray-700">
+								<th className="w-72 px-3 py-3 text-left text-sm font-semibold">
 									{isLoading ? (<Skeleton className="h-5 w-16" />) : ("Métrica")}
 								</th>
 								{operatorOptions.filter(op => op !== "Todos").map(operator => {
 									const isDimmed = selectedOperator !== "Todos" && selectedOperator !== operator;
 
 									return (
-										<th key={operator} className={`px-3 py-3 text-center text-sm font-semibold last:rounded-r-lg ${isDimmed ? "opacity-40" : "opacity-100"}`}>
+										<th key={operator} className={`px-3 py-3 text-center text-sm font-semibold ${isDimmed ? "opacity-40" : "opacity-100"}`}>
 											{isLoading ? (<Skeleton className="h-4 w-20 mx-auto" />) : (operator)}
 										</th>
 									);
@@ -248,12 +248,12 @@ export default function Digisac() {
 						</thead>
 						<tbody>
 							{reportDataPerOperator.map((metric, index) => (
-								<tr key={index} className="border-b last:border-none border-[#e5e7eb]">
+								<tr key={index} className="border-b last:border-none border-gray-700 even:bg-gray-700/25">
 									<td className="flex items-center gap-2 w-72 p-3">
 										<div className={`w-8 h-8 rounded-lg flex items-center justify-center ${metric.style}`}>
 											{isLoading ? (<Skeleton className="w-8 h-8" />) : (metric.icon)}
 										</div>
-										<span className="text-sm font-medium text-gray-600">
+										<span className="text-sm font-medium text-gray-400">
 											{isLoading ? <Skeleton className="h-4 w-32" /> : metric.label}
 										</span>
 									</td>

@@ -10,7 +10,7 @@ export default function Home() {
 			<div className="flex flex-col items-center space-y-4">
 				<Image src="/logo.png" alt="logo da Beforce" width={125} height={66} priority />
 
-				<div className="rounded-2xl backdrop-blur-sm border border-white/10 bg-white/3">
+				<div className="rounded-2xl backdrop-blur-xl border border-white/10 bg-white/5">
 					<LoginForm />
 				</div>
 			</div>

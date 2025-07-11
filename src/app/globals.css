@@ -1,37 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-	--color-red-1: oklch(0% 0.0166 27.38);
-	--color-red-2: oklch(17.5% 0.0254 27.38);
-	--color-red-3: oklch(23.6% 0.0783 27.38);
-	--color-red-4: oklch(28.1% 0.1195 27.38);
-	--color-red-5: oklch(32.7% 0.1331 27.38);
-	--color-red-6: oklch(37.9% 0.1382 27.38);
-	--color-red-7: oklch(44.8% 0.1493 27.38);
-	--color-red-8: oklch(54.1% 0.1816 27.38);
+	--color-primary-dark: oklch(32.749% 0.13359 27.308);
 	--color-primary: oklch(62.197% 0.25019 27.366);
-	--color-red-10: oklch(58% 0.2502 27.38);
-	--color-red-11: oklch(78.4% 0.2094 27.38);
-	--color-red-12: oklch(90.1% 0.0643 27.38);
-
-	--color-dark-1: oklch(0% 0 none);
-	--color-dark-2: oklch(18.5% 0 none);
-	--color-dark-3: oklch(24% 0 none);
-	--color-dark-4: oklch(27.7% 0 none);
-	--color-dark-5: oklch(31% 0 none);
-	--color-dark-6: oklch(34.8% 0 none);
-	--color-dark-7: oklch(40% 0 none);
-	--color-dark-8: oklch(49.1% 0 none);
-	--color-dark-9: oklch(54% 0 none);
-	--color-dark-10: oklch(58.6% 0 none);
-	--color-dark-11: oklch(77% 0 none);
-	--color-dark-12: oklch(94.9% 0 none);
 }
 
 @layer base {
 	body {
-		@apply bg-white text-black;
-		/* @apply bg-black text-white; */
+		@apply bg-gray-900 text-white;
 	}
 }
 

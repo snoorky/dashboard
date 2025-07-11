@@ -14,16 +14,18 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="max-xl:hidden fixed inset-0 flex flex-col z-50 px-4 max-w-44 min-h-screen border-r border-[#e5e7eb] bg-white">
-      <Image src="/logo-dark.png" alt="Beforce" width={125} height={66} priority />
+    <aside className="max-xl:hidden fixed inset-0 flex flex-col z-50 px-4 pt-2 max-w-44 min-h-screen border-r border-gray-700 bg-gray-800">
+      <div className="pb-4 border-b border-gray-700">
+        <Image src="/logo.png" alt="Beforce" width={125} height={66} priority />
+      </div>
       <nav className="flex-1 space-y-2 mt-8">
         {navigation.map((route, index) => {
           const isActive = pathname === route.url;
 
           return (
             <Link key={index} href={route.url}
-              className={`flex items-center gap-2 p-2 rounded-xl backdrop-blur-[2px]
-						${isActive ? "px-3 bg-linear-to-r from-primary to-red-5 text-white" : "border border-transparent"}
+              className={`flex items-center gap-2 p-2 rounded-xl backdrop-blur-[2px] hover:bg-gray-700
+						${isActive ? "px-3 bg-primary text-white" : "border border-transparent"}
 						`}
             >
               {route.icon}
