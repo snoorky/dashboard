@@ -12,10 +12,10 @@ export function Input(props: InputProps) {
 				id={props.id}
 				type={props.type}
 				placeholder={props.placeholder}
-				className="w-full p-3 rounded-lg outline-none border border-white/14 bg-gray-800 focus:border-primary"
+				className="w-full p-3 rounded-lg outline-none border border-light/25 bg-gray-800 focus:border-accent"
 				onChange={props.onChange}
 				value={props.value}
-				autoComplete={props.autocomplete}
+				autoComplete={props.autoComplete}
 				required={props.required}
 			/>
 		</div>

@@ -5,7 +5,7 @@ export function Button(props: ButtonProps) {
 	return (
 		<button
 			type={props.type}
-			className="w-full flex justify-center items-center p-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 bg-primary"
+			className="w-full flex justify-center items-center p-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 bg-accent"
 			disabled={props.isLoading}
 		>
 			{props.isLoading ? (

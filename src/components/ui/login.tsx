@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,16 @@ export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (session?.user) router.replace("/dashboard");
+    };
+
+    checkSession();
+  }, [router]);
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -39,10 +49,7 @@ export default function LoginForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="relative min-w-80 md:w-md lg:w-lg rounded-2xl p-8 text-white space-y-4"
-    >
+    <form onSubmit={handleSubmit} className="relative min-w-80 md:w-md lg:w-lg rounded-2xl p-8 text-light space-y-4">
       <Input
         id="email"
         label="E-mail"
@@ -50,6 +57,7 @@ export default function LoginForm() {
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        autoComplete="username"
         required
       />
 
@@ -60,13 +68,18 @@ export default function LoginForm() {
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        autocomplete="current-password"
+        autoComplete="current-password"
         required
       />
 
-      {error && <p className="text-sm text-red-12">{error}</p>}
+      {error && <p className="text-sm text-accent">{error}</p>}
 
-      <Button label="Entrar" type="submit" isLoading={isLoading} loadingText="Entrando..." />
+      <Button
+        label="Entrar"
+        type="submit"
+        isLoading={isLoading}
+        loadingText="Entrando..."
+      />
     </form>
   );
 }
