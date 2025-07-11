@@ -27,7 +27,7 @@ export default function Digisac() {
 			setIsLoading(true);
 			const { data, error } = await supabase.from("reports").select("period").eq("business_id", company?.id)
 			if (!error && data) setAvailablePeriods(Array.from(new Set(data.map((report) => report.period))));
-			// setIsLoading(false);
+			setIsLoading(false);
 		}
 
 		loadAvailablePeriods();
@@ -41,7 +41,7 @@ export default function Digisac() {
 			setIsLoading(true);
 			const { data, error } = await supabase.from("reports").select("*").eq("business_id", company?.id).eq("period", selectedPeriod);
 			if (!error && data) setReportsByPeriod((prevCache) => ({ ...prevCache, [selectedPeriod]: data }));
-			// setIsLoading(false);
+			setIsLoading(false);
 		}
 
 		loadReportsByPeriod();
