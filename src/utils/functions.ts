@@ -1,4 +1,3 @@
-// Retorna o período do mês anterior no formato "YYYY-MM"
 export function getPreviousMonthPeriod() {
   const currentDate = new Date();
   currentDate.setMonth(currentDate.getMonth() - 1);
@@ -6,7 +5,6 @@ export function getPreviousMonthPeriod() {
   return `${currentDate.getFullYear()}-${month}`;
 }
 
-// Formata o período para exibição (ex: "2024-06" => "Junho/2024")
 export function formatPeriod(period: string): string {
   const [year, month] = period.split("-");
   const monthNames = [
@@ -27,4 +25,11 @@ export function toTimeString(seconds: number): string {
   const m = Math.floor((seconds % 3600) / 60);
   const s = seconds % 60;
   return [h, m, s].map((v) => String(v).padStart(2, "0")).join(":");
+}
+
+export function getAverageTime(times: string[]): string {
+  if (times.length === 0) return "00:00:00";
+  const totalSeconds = times.reduce((sum, time) => sum + toSeconds(time), 0);
+  const avgSeconds = Math.floor(totalSeconds / times.length);
+  return toTimeString(avgSeconds);
 }

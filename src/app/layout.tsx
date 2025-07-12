@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import "./globals.css";
-import { AuthProvider } from "./contexts/authContext";
+import { AuthProvider } from "../utils/authContext";
 
 export const metadata: Metadata = {
   title: "Relatórios Mensais | Beforce Dashboard",
@@ -45,7 +45,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="pt-BR">
       <body className="antialiased">
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

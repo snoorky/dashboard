@@ -2,9 +2,8 @@
 
 import { useState, FormEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import supabase from "@/utils/supabase/client";
+import supabase from "@/utils/supabase";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -16,7 +15,6 @@ export default function LoginForm() {
   useEffect(() => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-
       if (session?.user) router.replace("/dashboard");
     };
 
@@ -50,24 +48,25 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className="relative min-w-80 md:w-md lg:w-lg rounded-2xl p-8 text-light space-y-4">
-      <Input
+      <label htmlFor="email" className="block font-medium mb-1">Email</label>
+      <input
         id="email"
-        label="E-mail"
-        placeholder="seu@email.com"
         type="email"
-        value={email}
+        placeholder="seu@email.com"
+        className="w-full p-3 rounded-lg outline-none border border-light/25 bg-gray-800 focus:border-accent"
         onChange={(e) => setEmail(e.target.value)}
+        value={email}
         autoComplete="username"
         required
       />
-
-      <Input
+      <label htmlFor="password" className="block font-medium mb-1">Senha</label>
+      <input
         id="password"
-        label="Senha"
-        placeholder="••••••••"
         type="password"
-        value={password}
+        placeholder="••••••••"
+        className="w-full p-3 rounded-lg outline-none border border-light/25 bg-gray-800 focus:border-accent"
         onChange={(e) => setPassword(e.target.value)}
+        value={password}
         autoComplete="current-password"
         required
       />

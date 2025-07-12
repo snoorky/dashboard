@@ -2,10 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Navbar } from "@/components/navbar";
-import Header from "@/components/header";
-import { Sidebar } from "@/components/sidebar";
-import { useAuth } from "../contexts/authContext";
+import { useAuth } from "../../utils/authContext";
 
 export default function Dashboard() {
 	const { user, loading } = useAuth();
@@ -15,18 +12,10 @@ export default function Dashboard() {
 		if (!loading && !user) router.push("/");
 	}, [user, loading, router]);
 
-	if (loading) return <p>Carregando...</p>;
-
 	if (!user) return null;
 
 	return (
-		<div className="flex">
-			<Sidebar />
-			<Navbar />
-
-			<div className="flex flex-col min-h-screen w-full xl:ml-44">
-				<Header />
-			</div>
-		</div>
+		<>
+		</>
 	);
 }

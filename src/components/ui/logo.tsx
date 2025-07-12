@@ -7,9 +7,9 @@ export function LogoBeforce({ isDark }: { isDark?: boolean }) {
         src={isDark ? "/logo-dark.png" : "/logo.png"}
         alt="logo da Beforce"
         className="absolute"
+        sizes="(max-width: 768px) 125px, 125px"
         fill
         priority
-        sizes="(max-width: 768px) 125px, 125px"
       />
     </div>
   )

@@ -1,9 +1,24 @@
 "use client";
 
-import supabase from "@/utils/supabase/client";
-import { AuthContextType, Company } from "@/utils/types";
-import { User } from "@supabase/supabase-js";
+import supabase from "@/utils/supabase";
+import { SupabaseClient, User, UserAppMetadata } from "@supabase/supabase-js";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+
+type AuthContextType = {
+	supabase: SupabaseClient;
+	loading: boolean;
+	user: UserAppMetadata | null;
+	company: Company | null;
+};
+
+type Company = {
+	id: string;
+	business_name: string;
+	domain: string;
+	url: string;
+	token: string;
+	created_at: string;
+};
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -19,7 +34,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 			const currentUser = session?.user ?? null;
 
 			if (!isMounted) return;
-
 			setUser(currentUser);
 
 			if (!currentUser) {
@@ -29,7 +43,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 			}
 
 			const domain = currentUser.email?.split("@")[1];
-
 			supabase.from("users").select("*").eq("domain", domain).single()
 				.then(({ data, error }) => {
 					if (!isMounted) return;
@@ -53,9 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 	}, []);
 
 	return (
-		<AuthContext.Provider value={{ company, user, loading, supabase }}>
-			{children}
-		</AuthContext.Provider>
+		<AuthContext.Provider value={{ company, user, loading, supabase }}>{children}</AuthContext.Provider>
 	);
 }
 
