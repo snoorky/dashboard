@@ -19,7 +19,7 @@ export function PerformanceMetrics({ data }: PerformanceProps) {
 
   const performanceMetrics = [
     { label: "Chamados abertos", style: "text-green-600 bg-green-100", icon: <MessageCirclePlus className="w-5 h-5" />, value: metricValues.opened },
-    { label: "Chamados fechados", style: "text-red-600 bg-red-100", icon: <MessageCircleOff className="w-5 h-5" />, value: metricValues.closed },
+    { label: "Chamados fechados", style: "text-accent bg-accent/10", icon: <MessageCircleOff className="w-5 h-5" />, value: metricValues.closed },
     { label: "Total de mensagens", style: "text-blue-600 bg-blue-100", icon: <MessageCircleMore className="w-5 h-5" />, value: metricValues.messages },
     { label: "Total de contatos", style: "text-purple-600 bg-purple-100", icon: <UsersRound className="w-5 h-5" />, value: metricValues.contacts }
   ];
