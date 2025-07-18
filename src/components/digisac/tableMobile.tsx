@@ -1,4 +1,4 @@
-import { Report } from "@/app/dashboard/digisac/page";
+import { Report } from "@/app/dashboard/report/page";
 import { getAverageTime } from "@/utils/functions";
 import { Hourglass, Timer, Bot, Clock, MessageSquare, MessageCircleMore, FileText } from "lucide-react";
 import { useMemo } from "react";
@@ -30,7 +30,7 @@ export function TableMobile({ reports }: TableMobileProps) {
   }, [reports, metricsTemplate]);
 
   return (
-    <div className="md:hidden space-y-2">
+    <section className="md:hidden space-y-2">
       {processedData.map((item, index) => (
         <div key={index} className="p-2 rounded-xl border border-surface bg-light">
           <div className="flex items-center justify-between">
@@ -44,6 +44,6 @@ export function TableMobile({ reports }: TableMobileProps) {
           </div>
         </div>
       ))}
-    </div>
+    </section>
   );
 }

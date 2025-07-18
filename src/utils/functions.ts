@@ -20,6 +20,11 @@ export function toSeconds(time: string): number {
   return h * 3600 + m * 60 + s;
 }
 
+export function toMinutes(time: string): number {
+  const [h, m, s] = time.split(":").map(Number);
+  return h * 60 + m + s / 60;
+}
+
 export function toTimeString(seconds: number): string {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
