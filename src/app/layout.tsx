@@ -1,6 +1,6 @@
-import { Metadata } from "next";
-import "./globals.css";
-import { AuthProvider } from "../utils/authContext";
+import { Metadata } from "next"
+import "./globals.css"
+import { AuthProvider } from "../context/authContext"
 
 export const metadata: Metadata = {
   title: "Relatórios Mensais | Beforce Dashboard",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-};
+}
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -50,5 +50,5 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </AuthProvider>
       </body>
     </html>
-  );
+  )
 }
