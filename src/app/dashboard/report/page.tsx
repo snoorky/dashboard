@@ -1,7 +1,6 @@
 "use client"
 
 import AverageTime from "@/components/report/charts/averageTime"
-import TicketsPerDepartment from "@/components/report/charts/ticketsDepartment"
 import TopUsers from "@/components/report/charts/topUsers"
 import { Filters } from "@/components/report/filters"
 import { PerformanceMetrics } from "@/components/report/performance"
@@ -68,18 +67,14 @@ export default function Reports() {
           </section>
         )
         : (
-          <section className="hidden md:block w-full">
+          <section className="w-full">
             <TableDesktop reportData={reportsData} reportFilters={reportFilter} />
           </section>
         )
       }
 
-      <section>
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <AverageTime reports={reportsData.filteredReports} />
-      </section>
-
-      <section className="grid grid-cols-2 gap-4">
-        <TicketsPerDepartment reports={reportsData.filteredReports} />
         <TopUsers reports={reportsData.filteredReports} />
       </section>
     </div>
