@@ -1,6 +1,6 @@
+import { AuthProvider } from "@/context/authContext"
 import { Metadata } from "next"
 import "./globals.css"
-import { AuthProvider } from "../context/authContext"
 
 export const metadata: Metadata = {
   title: "Relatórios Mensais | Beforce Dashboard",

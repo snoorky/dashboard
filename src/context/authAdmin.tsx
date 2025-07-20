@@ -1,8 +1,8 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useAuth } from "./authContext"
 import { useEffect } from "react"
+import { useAuth } from "./authContext"
 
 export function AdminGuard({ children }: { children: React.ReactNode }) {
   const { isAdmin, loading } = useAuth()

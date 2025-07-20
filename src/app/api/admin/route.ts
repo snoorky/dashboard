@@ -1,4 +1,4 @@
-import supabaseAdmin from "@/utils/supabaseAdmin"
+import supabaseAdmin from "@/supabase/admin"
 import { NextRequest, NextResponse } from "next/server"
 
 const isAdminEmail = (email: string | null) => {

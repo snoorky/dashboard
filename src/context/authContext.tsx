@@ -1,8 +1,8 @@
 "use client"
 
-import supabase from "@/utils/supabase"
+import supabase from "@/supabase/client"
 import { SupabaseClient, User } from "@supabase/supabase-js"
-import { useState, useEffect, useContext, createContext } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 
 type Company = {
 	id: string

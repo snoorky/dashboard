@@ -1,8 +1,8 @@
 "use client"
 
-import { Report } from "@/app/dashboard/report/page"
 import Card from "@/components/ui/card"
-import { getAverageTime, toMinutes } from "@/utils/functions"
+import { Report } from "@/types/report"
+import { getAverageTime, toMinutes } from "@/utils/timeConversion"
 import { ApexOptions } from "apexcharts"
 import { Clock } from "lucide-react"
 import dynamic from "next/dynamic"

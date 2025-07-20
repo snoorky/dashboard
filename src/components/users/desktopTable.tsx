@@ -1,7 +1,7 @@
-import { ActionButton } from "@/components/ui/actionAPI"
 import { UserWithStatus } from "@/types/user"
-import { getstatusStyle } from "@/utils/functions"
-import { MailCheck, UserRoundPen, KeyRound, ShieldBan, ShieldCheck, Trash2, UserRoundCheck, UserRound, UserRoundX } from "lucide-react"
+import { UserRoundCheck, UserRound, UserRoundX, UserRoundPen, KeyRound, ShieldBan, ShieldCheck, MailCheck, Trash2 } from "lucide-react"
+import { ActionButton } from "../ui/actionAPI"
+import { getStatusStyle } from "@/utils/userStatus"
 
 export default function UsersDesktopTable({ users }: { users: UserWithStatus[] }) {
   return (
@@ -18,7 +18,7 @@ export default function UsersDesktopTable({ users }: { users: UserWithStatus[] }
         </thead>
         <tbody>
           {users.map(user => {
-            const statusStyle = getstatusStyle(user.status)
+            const statusStyle = getStatusStyle(user.status)
 
             return (
               <tr key={user.id} className="border-b last:border-none border-surface even:bg-dark/6">

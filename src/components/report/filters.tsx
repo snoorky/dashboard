@@ -1,12 +1,12 @@
 "use client"
 
 import { useReportFilter } from "@/context/reportFilterContext"
-import Card from "../ui/card"
-import { SlidersHorizontal } from "lucide-react"
-import { Select } from "../ui/select"
-import { formatPeriod } from "@/utils/functions"
 import { useReportsData } from "@/hooks/useReportsData"
-import { useEffect, useState } from "react"
+import { SlidersHorizontal } from "lucide-react"
+import { useState, useEffect } from "react"
+import Card from "../ui/card"
+import { Select } from "../ui/select"
+import { formatPeriod } from "@/utils/monthPeriod"
 
 type FilterSectionProps = {
   reportData: ReturnType<typeof useReportsData>

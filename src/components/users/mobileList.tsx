@@ -1,10 +1,10 @@
 "use client"
 
-import { ChevronDown, UserRoundCheck, UserRound, UserRoundX, UserRoundPen, KeyRound, ShieldBan, ShieldCheck, MailWarning, Trash2, MailCheck } from "lucide-react"
+import { UserWithStatus } from "@/types/user"
+import { UserRoundCheck, UserRound, UserRoundX, ChevronDown, UserRoundPen, KeyRound, ShieldBan, ShieldCheck, MailWarning, MailCheck, Trash2 } from "lucide-react"
 import { useState } from "react"
 import { ActionButton } from "../ui/actionAPI"
-import { UserWithStatus } from "@/types/user"
-import { getstatusStyle } from "@/utils/functions"
+import { getStatusStyle } from "@/utils/userStatus"
 
 export default function UsersMobileList({ users }: { users: UserWithStatus[] }) {
   const [expandedUserId, setExpandedUserId] = useState<string | null>(null)
@@ -14,7 +14,7 @@ export default function UsersMobileList({ users }: { users: UserWithStatus[] }) 
   return (
     <div className="md:hidden space-y-2">
       {users.map(user => {
-        const statusStyle = getstatusStyle(user.status)
+        const statusStyle = getStatusStyle(user.status)
         const isExpanded = expandedUserId === user.id
 
         return (

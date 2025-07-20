@@ -1,9 +1,9 @@
 import UsersDesktopTable from "@/components/users/desktopTable"
 import UsersMobileList from "@/components/users/mobileList"
 import { UserBase } from "@/types/user"
-import { getUserStatus } from "@/utils/functions"
-import supabaseAdmin from "@/utils/supabaseAdmin"
+import supabaseAdmin from "@/supabase/admin"
 import { UserCog, UserPlus } from "lucide-react"
+import { getUserStatus } from "@/utils/userStatus"
 
 export const dynamic = "force-dynamic"
 

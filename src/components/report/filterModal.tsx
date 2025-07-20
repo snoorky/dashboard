@@ -2,11 +2,11 @@
 
 import { useReportFilter } from "@/context/reportFilterContext"
 import { useReportsData } from "@/hooks/useReportsData"
-import { useEffect, useState } from "react"
+import { X } from "lucide-react"
+import { useState, useEffect } from "react"
 import { Modal } from "../ui/modal"
 import { Select } from "../ui/select"
-import { formatPeriod } from "@/utils/functions"
-import { X } from "lucide-react"
+import { formatPeriod } from "@/utils/monthPeriod"
 
 export function FilterModal({ onClose }: { onClose: () => void }) {
   const reportFilter = useReportFilter()

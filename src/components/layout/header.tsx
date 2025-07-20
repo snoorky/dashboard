@@ -2,11 +2,11 @@
 
 import { useAuth } from "@/context/authContext"
 import { useLayout } from "@/context/layoutContext"
-import supabase from "@/utils/supabase"
-import { ChartNoAxesCombined, ChevronDown, LogOut, User2 } from "lucide-react"
+import supabase from "@/supabase/client"
+import { ChartNoAxesCombined, User2, ChevronDown, LogOut } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
+import { useState, useRef, useEffect } from "react"
 
 export default function Header() {
 	const { user, company } = useAuth()

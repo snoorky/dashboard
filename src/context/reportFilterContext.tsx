@@ -1,14 +1,8 @@
 "use client"
 
-import { getPreviousMonthPeriod } from "@/utils/functions"
+import { ReportFilterContextType } from "@/types/report"
+import { getPreviousMonthPeriod } from "@/utils/monthPeriod"
 import { createContext, ReactNode, useContext, useState } from "react"
-
-type ReportFilterContextType = {
-  selectedPeriod: string
-  selectedOperatorDepartment: string
-  setSelectedPeriod: (period: string) => void
-  setSelectedOperatorDepartment: (value: string) => void
-}
 
 const ReportFilterContext = createContext<ReportFilterContextType | undefined>(undefined)
 

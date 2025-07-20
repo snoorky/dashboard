@@ -1,5 +1,6 @@
 "use client"
 
+import { useAuth } from "@/context/authContext"
 import { Building2, Globe2, Headphones, LayoutDashboard, Search, SlidersHorizontal, UserCog, UserPlus, Users } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -7,7 +8,6 @@ import { useState } from "react"
 import { FilterModal } from "../report/filterModal"
 import { SearchModal } from "../report/searchModal"
 import { CreateUserModal } from "../users/userModal"
-import { useAuth } from "@/context/authContext"
 
 type NavItemProps = {
 	icon: React.ReactNode

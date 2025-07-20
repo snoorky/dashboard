@@ -1,9 +1,9 @@
 "use client"
 
-import { Report } from "@/app/dashboard/report/page"
+import { Report } from "@/types/report"
+import { MessageCirclePlus, MessageCircleOff, MessageCircleMore, UsersRound } from "lucide-react"
 import { useMemo } from "react"
 import Card from "../ui/card"
-import { MessageCirclePlus, MessageCircleOff, MessageCircleMore, UsersRound } from "lucide-react"
 
 export function PerformanceMetrics({ data }: { data: Report[] }) {
   const metricValues = useMemo(() => {

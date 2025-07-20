@@ -1,11 +1,11 @@
 "use client"
 
-import { Report } from "@/app/dashboard/report/page"
 import Card from "@/components/ui/card"
 import dynamic from "next/dynamic"
 import { ApexOptions } from "apexcharts"
 import { Clock } from "lucide-react"
 import { useMemo } from "react"
+import { Report } from "@/types/report"
 
 const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false })
 

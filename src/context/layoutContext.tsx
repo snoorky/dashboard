@@ -1,12 +1,9 @@
 "use client"
 
+import { LayoutContextType } from "@/types/layout"
 import { getPageTitle } from "@/utils/getPageTitle"
 import { usePathname } from "next/navigation"
 import { createContext, ReactNode, useContext, useMemo } from "react"
-
-type LayoutContextType = {
-  pageTitle: string
-}
 
 const LayoutContext = createContext<LayoutContextType | undefined>(undefined)
 

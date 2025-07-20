@@ -1,10 +1,10 @@
 "use client"
 
-import { Report } from "@/app/dashboard/report/page"
 import { useAuth } from "@/context/authContext"
 import { useReportFilter } from "@/context/reportFilterContext"
-import supabase from "@/utils/supabase"
-import { useEffect, useMemo, useState } from "react"
+import { Report } from "@/types/report"
+import supabase from "@/supabase/client"
+import { useState, useEffect, useMemo } from "react"
 
 export function useReportsData() {
   const { company } = useAuth()

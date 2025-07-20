@@ -1,7 +1,7 @@
 "use client"
 
-import { Report } from "@/app/dashboard/report/page"
-import { getAverageTime } from "@/utils/functions"
+import { Report } from "@/types/report"
+import { getAverageTime } from "@/utils/timeConversion"
 import { Hourglass, Timer, Bot, Clock, MessageSquare, MessageCircleMore, FileText } from "lucide-react"
 import { useMemo } from "react"
 

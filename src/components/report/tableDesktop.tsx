@@ -1,8 +1,8 @@
 "use client"
 
-import { Report } from "@/app/dashboard/report/page"
 import { useReportFilter } from "@/context/reportFilterContext"
 import { useReportsData } from "@/hooks/useReportsData"
+import { Report } from "@/types/report"
 import { UsersRound } from "lucide-react"
 import { useMemo } from "react"
 

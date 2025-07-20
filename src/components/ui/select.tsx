@@ -1,15 +1,8 @@
 "use client"
 
+import { SelectProps } from "@/types/ui"
 import { ChevronDown } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
-
-type SelectProps = {
-  id: string
-  label: string
-  options: { label: string, value: string }[]
-  value: string
-  onChange: (value: string) => void
-}
+import { useState, useRef, useEffect } from "react"
 
 export function Select(props: SelectProps) {
   const [isOpen, setIsOpen] = useState(false)

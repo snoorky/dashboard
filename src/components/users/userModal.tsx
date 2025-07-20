@@ -1,9 +1,9 @@
 "use client"
 
-import { FormEvent, useState } from "react"
+import { X } from "lucide-react"
+import { useState, FormEvent } from "react"
 import toast from "react-hot-toast"
 import { Modal } from "../ui/modal"
-import { X } from "lucide-react"
 
 export function CreateUserModal({ onClose }: { onClose: () => void }) {
   const [email, setEmail] = useState("")
