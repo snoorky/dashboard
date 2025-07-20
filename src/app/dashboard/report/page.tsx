@@ -6,7 +6,6 @@ import { Filters } from "@/components/report/filters"
 import { PerformanceMetrics } from "@/components/report/performance"
 import { TableDesktop } from "@/components/report/tableDesktop"
 import { TableMobile } from "@/components/report/tableMobile"
-import { useLayout } from "@/context/layoutContext"
 import { useReportFilter } from "@/context/reportFilterContext"
 import { useMediaQuery } from "@/hooks/useMediaQuery"
 import { useReportsData } from "@/hooks/useReportsData"
@@ -33,18 +32,18 @@ export type Report = {
 }
 
 export default function Reports() {
-  const { pageTitle } = useLayout()
   const reportFilter = useReportFilter()
   const reportsData = useReportsData()
-  const isMobile = useMediaQuery("(max-width: 48rem)")
+  const isMobile = useMediaQuery("(max-width: 767px)")
+  const isDesktop = useMediaQuery("(max-width: 1280px)")
 
   return (
     <div className="py-8 space-y-4">
-      {isMobile && (
+      {isDesktop && (
         <>
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1 md">
             <ChartNoAxesCombined className="w-6 h-6 text-accent" />
-            <h1 className="text-2xl font-bold">{pageTitle}</h1>
+            <h1 className="text-2xl font-bold">Atendimento</h1>
           </div>
           <p className="text-sm">Acompanhe as métricas de atendimento</p>
         </>
@@ -55,7 +54,7 @@ export default function Reports() {
       </section>
 
       {!isMobile && (
-        <section>
+        <section className="hidden xl:block">
           <Filters reportData={reportsData} reportFilters={reportFilter} />
         </section>
       )}

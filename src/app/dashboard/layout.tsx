@@ -6,8 +6,10 @@ import { SideBar } from "@/components/layout/sidebar"
 import { useAuth } from "@/context/authContext"
 import { LayoutProvider } from "@/context/layoutContext"
 import { ReportFilterProvider } from "@/context/reportFilterContext"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
+import { Toaster } from "react-hot-toast"
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth()
@@ -32,6 +34,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </main>
           </div>
         </div>
+        <Toaster position="top-center" />
       </ReportFilterProvider>
     </LayoutProvider>
   )

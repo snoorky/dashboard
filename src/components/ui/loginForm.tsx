@@ -33,7 +33,7 @@ export function LoginForm() {
 
       <button
         type="submit"
-        className="w-full font-medium flex justify-center items-center p-3 rounded-lg disabled:cursor-not-allowed transition-colors duration-200 bg-accent"
+        className="w-full font-medium flex justify-center items-center p-3 rounded-lg disabled:cursor-not-allowed transition-colors duration-200 bg-accent text-light"
         disabled={response.isLoading}
       >
         {response.isLoading ? (

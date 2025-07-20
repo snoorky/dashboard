@@ -17,6 +17,7 @@ type AuthContextType = {
 	supabase: SupabaseClient
 	user: User | null
 	company: Company | null
+	isAdmin: boolean
 	loading: boolean
 }
 
@@ -25,6 +26,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: React.ReactNode }) {
 	const [user, setUser] = useState<User | null>(null)
 	const [company, setCompany] = useState<Company | null>(null)
+	const [isAdmin, setIsAdmin] = useState(false)
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
@@ -35,10 +37,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 			const currentUser = data.session?.user ?? null
 
 			if (!isMounted) return
+
 			setUser(currentUser)
 
-			if (currentUser) await loadCompany(currentUser)
-			else setCompany(null)
+			if (currentUser) {
+				await loadCompany(currentUser)
+				setIsAdmin(currentUser.email?.endsWith("@beforce.com.br") ?? false)
+			} else {
+				setCompany(null)
+				setIsAdmin(false)
+			}
 
 			setLoading(false)
 		}
@@ -58,8 +66,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 		const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
 			const currentUser = session?.user ?? null
 			setUser(currentUser)
-			if (currentUser) loadCompany(currentUser)
-			else setCompany(null)
+
+			if (currentUser) {
+				loadCompany(currentUser)
+				setIsAdmin(currentUser.email?.endsWith("@beforce.com.br") ?? false)
+			} else {
+				setCompany(null)
+				setIsAdmin(false)
+			}
 		})
 
 		loadSession()
@@ -71,7 +85,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 	}, [])
 
 	return (
-		<AuthContext.Provider value={{ supabase, user, company, loading }}>
+		<AuthContext.Provider value={{ supabase, user, company, isAdmin, loading }}>
 			{children}
 		</AuthContext.Provider>
 	)
