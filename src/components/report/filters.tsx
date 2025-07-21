@@ -1,17 +1,11 @@
 "use client"
 
-import { useReportFilter } from "@/context/reportFilterContext"
-import { useReportsData } from "@/hooks/useReportsData"
+import { FilterSectionProps } from "@/types/report"
 import { SlidersHorizontal } from "lucide-react"
 import { useState, useEffect } from "react"
 import Card from "../ui/card"
 import { Select } from "../ui/select"
 import { formatPeriod } from "@/utils/monthPeriod"
-
-type FilterSectionProps = {
-  reportData: ReturnType<typeof useReportsData>
-  reportFilters: ReturnType<typeof useReportFilter>
-}
 
 export function Filters({ reportData, reportFilters }: FilterSectionProps) {
   const [localPeriod, setLocalPeriod] = useState(reportFilters.selectedPeriod)

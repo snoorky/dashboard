@@ -1,3 +1,6 @@
+import { useReportFilter } from "@/context/reportFilterContext"
+import { useReportsData } from "@/hooks/useReportsData"
+
 export type Report = {
   id: string
   business_id: string
@@ -23,4 +26,9 @@ export type ReportFilterContextType = {
   selectedOperatorDepartment: string
   setSelectedPeriod: (period: string) => void
   setSelectedOperatorDepartment: (value: string) => void
+}
+
+export type FilterSectionProps = {
+  reportData: ReturnType<typeof useReportsData>
+  reportFilters: ReturnType<typeof useReportFilter>
 }
