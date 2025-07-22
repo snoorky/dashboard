@@ -88,8 +88,13 @@ export async function POST(req: NextRequest) {
       default:
         return NextResponse.json({ error: "Ação inválida" }, { status: 400 })
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Erro na API:", error)
-    return NextResponse.json({ error: error.message || "Erro interno" }, { status: 500 })
+
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    return NextResponse.json({ error: "Erro interno" }, { status: 500 })
   }
 }
