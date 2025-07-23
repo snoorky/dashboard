@@ -33,16 +33,16 @@ export default function Header() {
 	return (
 		<header className="flex items-center p-4 border-b border-surface bg-light">
 			<div className="w-56">
-				<div className="relative w-[95px] h-[43px]">
-					<Image
-						src="/logo-dark.png"
-						alt="logo da Beforce"
-						className="absolute"
-						sizes="(max-width: 768px) 95px, 95px"
-						fill
-						priority
-					/>
-				</div>
+				<Image
+					src="/logo-dark.webp"
+					alt="logo da Beforce"
+					width={95}
+					height={43}
+					sizes="(max-width: 768px) 95px, 95px"
+					loading="eager"
+					quality={60}
+					priority
+				/>
 			</div>
 
 			<div className="hidden xl:block">

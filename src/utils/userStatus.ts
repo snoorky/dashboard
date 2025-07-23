@@ -16,6 +16,6 @@ export function getStatusStyle(status: UserStatus): string {
     case "Banido":
       return "text-rose-600 bg-rose-100"
     default:
-      return "bg-gray-200 text-gray-800"
+      return "text-gray-800 bg-gray-200"
   }
 }

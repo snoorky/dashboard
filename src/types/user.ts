@@ -1,5 +1,7 @@
 export type UserStatus = "Ativo" | "A Confirmar" | "Banido"
 
+export type UserWithStatus = UserBase & { status: UserStatus }
+
 export type UserBase = {
   id: string
   email: string
@@ -12,8 +14,6 @@ export type UserBase = {
   banned_until?: string
   confirmed_at?: string
 }
-
-export type UserWithStatus = UserBase & { status: UserStatus }
 
 export type AdminActions = {
   icon: React.ReactNode

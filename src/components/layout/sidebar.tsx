@@ -1,65 +1,24 @@
 "use client"
 
 import { useAuth } from "@/context/authContext"
-import { LayoutDashboard, Headphones, Globe2, Users, Building2, UserCog } from "lucide-react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-
-type NavItemProps = {
-	icon: React.ReactNode
-	name: string
-	url: string
-}
-
-const navigation: NavItemProps[] = [
-	{ icon: <LayoutDashboard className="w-4.5 h-4.5" />, name: "Dashboard", url: "/dashboard" },
-	{ icon: <Headphones className="w-4.5 h-4.5" />, name: "Atendimento", url: "/dashboard/report" },
-	{ icon: <Globe2 className="w-4.5 h-4.5" />, name: "Website", url: "/dashboard/website" },
-	{ icon: <Users className="w-4.5 h-4.5" />, name: "Equipe", url: "/dashboard/team" },
-]
-
-const adminNavigation: NavItemProps[] = [
-	{ icon: <Building2 className="w-4.5 h-4.5" />, name: "Empresas", url: "/dashboard/companies" },
-	{ icon: <UserCog className="w-4.5 h-4.5" />, name: "Usuários", url: "/dashboard/users" },
-]
+import { navigation, adminNavigation } from "../navigation/navigationConfig"
+import { NavigationList } from "../navigation/navigationList"
 
 export function SideBar() {
-	const pathname = usePathname()
 	const { isAdmin } = useAuth()
 
 	return (
 		<div className="max-xl:hidden flex flex-col z-50 p-4 max-w-56 border-r border-surface bg-light">
-			<nav className="flex flex-col gap-2">
-				<span className="text-xs font-semibold pb-1 pt-4 text-dark/75">Geral</span>
-				{navigation.map((route, index) => {
-					const isActive = pathname === route.url
+			<NavigationList items={navigation} variant="desktop" title="Geral" />
 
-					return (
-						<Link key={index} href={route.url} className={`flex items-center gap-1 w-full rounded-full text-sm ${isActive && "bg-accent"}`}>
-							<span className={`p-2 m-1 rounded-full text-accent ${isActive ? "bg-light" : "bg-accent/15"}`}>{route.icon}</span>
-							<span className={isActive ? "text-light" : "text-dark"}>{route.name}</span>
-						</Link>
-					)
-				})}
-			</nav>
 			{isAdmin && (
 				<>
 					<hr className="mt-4 border-t border-surface" />
-					<nav className="flex flex-col gap-2">
-						<span className="text-xs font-semibold pb-1 pt-4 text-dark/75">Administração</span>
-						{adminNavigation.map((route, index) => {
-							const isActive = pathname === route.url
-
-							return (
-								<Link key={index} href={route.url} className={`flex items-center gap-1 w-full rounded-full text-sm ${isActive && "bg-accent"}`}>
-									<span className={`p-2 m-1 rounded-full text-accent ${isActive ? "bg-light" : "bg-accent-light"}`}>{route.icon}</span>
-									<span className={isActive ? "text-light" : "text-dark"}>{route.name}</span>
-								</Link>
-							)
-						})}
-					</nav>
+					<NavigationList items={adminNavigation} variant="desktop" title="Administração" />
 				</>
 			)}
+
 			<div className="mt-auto">
 				<div className="p-2 rounded-xl flex flex-col items-center space-y-2 text-sm text-center bg-green-200">
 					<div className="-mt-8 p-2 rounded-full outline-4 outline-light bg-green-200">

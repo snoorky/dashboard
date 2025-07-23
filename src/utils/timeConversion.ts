@@ -1,23 +1,23 @@
-export function toSeconds(time: string): number {
-  const [h, m, s] = time.split(":").map(Number)
-  return h * 3600 + m * 60 + s
+export function toSeconds(timeString: string): number {
+  const [hours, minutes, seconds] = timeString.split(":").map(Number)
+  return hours * 3600 + minutes * 60 + seconds
 }
 
-export function toMinutes(time: string): number {
-  const [h, m, s] = time.split(":").map(Number)
-  return h * 60 + m + s / 60
+export function toMinutes(timeString: string): number {
+  const [hours, minutes, seconds] = timeString.split(":").map(Number)
+  return hours * 60 + minutes + seconds / 60
 }
 
-export function toTimeString(seconds: number): string {
-  const h = Math.floor(seconds / 3600)
-  const m = Math.floor((seconds % 3600) / 60)
-  const s = seconds % 60
-  return [h, m, s].map((v) => String(v).padStart(2, "0")).join(":")
+export function toTimeString(totalSeconds: number): string {
+  const hours = Math.floor(totalSeconds / 3600)
+  const minutes = Math.floor((totalSeconds % 3600) / 60)
+  const seconds = totalSeconds % 60
+  return [hours, minutes, seconds].map((unit) => String(unit).padStart(2, "0")).join(":")
 }
 
-export function getAverageTime(times: string[]): string {
-  if (times.length === 0) return "00:00:00"
-  const totalSeconds = times.reduce((sum, time) => sum + toSeconds(time), 0)
-  const avgSeconds = Math.floor(totalSeconds / times.length)
+export function getAverageTime(timeStrings: string[]): string {
+  if (timeStrings.length === 0) return "00:00:00"
+  const totalSeconds = timeStrings.reduce((sum, timeString) => sum + toSeconds(timeString), 0)
+  const avgSeconds = Math.floor(totalSeconds / timeStrings.length)
   return toTimeString(avgSeconds)
 }

@@ -49,52 +49,11 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ user: data.user })
       }
 
-      // case "banUser": {
-      //   const { userId } = payload
-      //   const { error } = await supabaseAdmin.auth.admin.updateUserById(userId, { banned: true })
-      //   if (error) throw error
-      //   return NextResponse.json({ success: true })
-      // }
-
-      // case "unbanUser": {
-      //   const { userId } = payload
-      //   const { error } = await supabaseAdmin.auth.admin.updateUserById(userId, { banned: false })
-      //   if (error) throw error
-      //   return NextResponse.json({ success: true })
-      // }
-
-      // case "sendPasswordReset": {
-      //   const { email, redirectTo } = payload
-      //   const { data, error } = await supabaseAdmin.auth.admin.generateLink({
-      //     type: "recovery",
-      //     email,
-      //     options: { redirectTo },
-      //   })
-      //   if (error) throw error
-      //   return NextResponse.json({ link: data.action_link })
-      // }
-
-      // case "sendEmailVerification": {
-      //   const { email, redirectTo } = payload
-      //   const { data, error } = await supabaseAdmin.auth.admin.generateLink({
-      //     type: "signup",
-      //     email,
-      //     options: { redirectTo },
-      //   })
-      //   if (error) throw error
-      //   return NextResponse.json({ link: data.action_link })
-      // }
-
       default:
         return NextResponse.json({ error: "Ação inválida" }, { status: 400 })
     }
   } catch (error: unknown) {
-    console.error("Erro na API:", error)
-
-    if (error instanceof Error) {
-      return NextResponse.json({ error: error.message }, { status: 500 })
-    }
-
+    if (error instanceof Error) return NextResponse.json({ error: error.message }, { status: 500 })
     return NextResponse.json({ error: "Erro interno" }, { status: 500 })
   }
 }
